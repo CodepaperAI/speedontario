@@ -26,5 +26,5 @@ export const SHOP = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3007",
   bookingUrl:
     process.env.NEXT_PUBLIC_BOOKING_URL ??
-    "https://www.speedy.com/en-ca/contact-us/",
+    "https://app.shopmonkey.cloud/public/scheduler/357cc41e-a146-45b3-9a6c-15e4329df0fd?fullPage=true",
 };
