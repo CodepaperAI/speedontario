@@ -4,21 +4,6 @@ import { listBlogs, formatDate } from "@/lib/upliftai";
 
 export const revalidate = 300;
 
-function BlogFallback() {
-  return (
-    <div className="w-full h-full speedy-fallback grid place-items-center">
-      <div className="relative z-10 text-center px-6">
-        <div className="font-display font-extrabold text-white/95 text-3xl md:text-4xl uppercase tracking-tight leading-none">
-          Speedy
-        </div>
-        <div className="mt-1 font-display font-bold text-speedy-yellow text-xs uppercase tracking-widest">
-          Auto Service
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default async function HomePage() {
   const blogs = (await listBlogs({ limit: 3 })).slice(0, 3);
 
@@ -40,17 +25,19 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
-                href={`tel:${SHOP.phoneHref}`}
+                href={SHOP.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-speedy-yellow text-speedy-blue-dark font-bold uppercase tracking-wide px-6 py-3.5 rounded-sm hover:bg-white transition"
+              >
+                Book Appointment
+              </a>
+              <a
+                href={`tel:${SHOP.phoneHref}`}
+                className="inline-flex items-center gap-2 bg-transparent border-2 border-white text-white font-bold uppercase tracking-wide px-6 py-3.5 rounded-sm hover:bg-white hover:text-speedy-blue transition"
               >
                 Call {SHOP.phone}
               </a>
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 bg-transparent border-2 border-white text-white font-bold uppercase tracking-wide px-6 py-3.5 rounded-sm hover:bg-white hover:text-speedy-blue transition"
-              >
-                Read the blog
-              </Link>
             </div>
           </div>
 
@@ -66,10 +53,18 @@ export default async function HomePage() {
               ))}
             </ul>
             <a
-              href={`tel:${SHOP.phoneHref}`}
+              href={SHOP.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-5 block text-center bg-speedy-blue hover:bg-speedy-blue-dark text-white font-bold uppercase tracking-wide py-3 rounded-sm transition"
             >
               Book Appointment
+            </a>
+            <a
+              href={`tel:${SHOP.phoneHref}`}
+              className="mt-2 block text-center text-speedy-blue hover:text-speedy-blue-dark text-sm font-semibold uppercase tracking-wide transition"
+            >
+              or call {SHOP.phone}
             </a>
           </div>
         </div>
@@ -126,18 +121,16 @@ export default async function HomePage() {
                   href={`/blog/${b.slug}`}
                   className="group bg-white border border-speedy-gray-300 hover:border-speedy-blue rounded-sm overflow-hidden transition flex flex-col"
                 >
-                  <div className="aspect-[16/10] bg-speedy-gray-300 relative overflow-hidden">
-                    {b.featuredImage ? (
-                      // eslint-disable-next-line @next/next/no-img-element
+                  {b.featuredImage && (
+                    <div className="aspect-[16/10] bg-speedy-gray-100 relative overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={b.featuredImage}
                         alt={b.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                       />
-                    ) : (
-                      <BlogFallback />
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="text-xs uppercase tracking-widest text-speedy-blue font-bold mb-2">
                       {b.categories?.[0] ?? "News"}

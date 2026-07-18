@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Image from "next/image";
 import { SHOP } from "@/lib/shop";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-speedy-gray-300 shadow-sm">
-      <div className="bg-speedy-black text-speedy-gray-100 text-xs">
+    <header className="sticky top-0 z-40 bg-speedy-blue-dark border-b border-black/40 shadow-md">
+      <div className="bg-black/40 text-white/80 text-xs">
         <div className="container-x flex items-center justify-between py-2 gap-4">
           <span className="hidden sm:inline">{SHOP.address}</span>
           <span className="flex items-center gap-4">
@@ -16,33 +17,41 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="container-x flex items-center justify-between py-4">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 bg-speedy-blue text-white grid place-items-center font-display font-extrabold text-2xl leading-none rounded-sm group-hover:bg-speedy-blue-dark transition">
-            S
-          </div>
-          <div className="leading-tight">
-            <div className="font-display font-extrabold text-xl md:text-2xl tracking-tight uppercase">
-              Speedy Auto Service
-            </div>
-            <div className="text-[11px] md:text-xs text-speedy-gray-700 uppercase tracking-widest">
+      <div className="container-x flex items-center justify-between py-3">
+        <Link href="/" className="flex items-center gap-4 group" aria-label="Speedy Auto Service St. Catharines — home">
+          <Image
+            src="/speedy-logo-official.jpeg"
+            alt="Speedy Auto Service — A Fix Network Company"
+            width={220}
+            height={70}
+            priority
+            className="h-12 md:h-14 w-auto mix-blend-screen"
+          />
+          <span className="hidden sm:block h-10 w-px bg-white/20" aria-hidden />
+          <span className="hidden sm:block leading-tight">
+            <span className="block font-display font-bold text-white text-sm uppercase tracking-widest">
               St. Catharines
-            </div>
-          </div>
+            </span>
+            <span className="block text-[11px] text-white/60 uppercase tracking-wider">
+              Hartzel Road
+            </span>
+          </span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wide">
-          <Link href="/" className="hover:text-speedy-blue transition">Home</Link>
-          <Link href="/#services" className="hover:text-speedy-blue transition">Services</Link>
-          <Link href="/blog" className="hover:text-speedy-blue transition">Blog</Link>
-          <Link href="/#contact" className="hover:text-speedy-blue transition">Contact</Link>
+        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold uppercase tracking-wide text-white/90">
+          <Link href="/" className="hover:text-speedy-yellow transition">Home</Link>
+          <Link href="/#services" className="hover:text-speedy-yellow transition">Services</Link>
+          <Link href="/blog" className="hover:text-speedy-yellow transition">Blog</Link>
+          <Link href="/#contact" className="hover:text-speedy-yellow transition">Contact</Link>
         </nav>
 
         <a
-          href={`tel:${SHOP.phoneHref}`}
-          className="hidden sm:inline-flex items-center gap-2 bg-speedy-blue hover:bg-speedy-blue-dark text-white px-4 py-2.5 rounded-sm font-semibold text-sm uppercase tracking-wide transition"
+          href={SHOP.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden sm:inline-flex items-center gap-2 bg-speedy-yellow hover:bg-white text-speedy-blue-dark px-4 py-2.5 rounded-sm font-bold text-sm uppercase tracking-wide transition"
         >
-          Book Now
+          Book Appointment
         </a>
       </div>
     </header>

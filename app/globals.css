@@ -53,21 +53,6 @@ body {
     );
 }
 
-.speedy-fallback {
-  background:
-    radial-gradient(circle at 20% 30%, rgba(255,204,0,0.15) 0%, transparent 45%),
-    linear-gradient(135deg, #002E6D 0%, #0058A9 100%);
-  position: relative;
-}
-.speedy-fallback::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 22px);
-  pointer-events: none;
-}
-
 .prose-speedy h2 {
   font-family: var(--font-display);
   font-weight: 700;

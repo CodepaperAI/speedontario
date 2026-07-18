@@ -24,4 +24,7 @@ export const SHOP = {
   ],
   tagline: "We put you back on the road safely and in no time.",
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3007",
+  bookingUrl:
+    process.env.NEXT_PUBLIC_BOOKING_URL ??
+    "https://www.speedy.com/en-ca/contact-us/",
 };

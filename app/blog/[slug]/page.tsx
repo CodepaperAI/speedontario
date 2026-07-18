@@ -8,21 +8,6 @@ export const revalidate = 300;
 
 type Props = { params: Promise<{ slug: string }> };
 
-function BlogFallback() {
-  return (
-    <div className="w-full h-full speedy-fallback grid place-items-center">
-      <div className="relative z-10 text-center px-6">
-        <div className="font-display font-extrabold text-white/95 text-3xl md:text-4xl uppercase tracking-tight leading-none">
-          Speedy
-        </div>
-        <div className="mt-1 font-display font-bold text-speedy-yellow text-xs uppercase tracking-widest">
-          Auto Service
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const blog = await getBlog(slug);
@@ -150,12 +135,22 @@ export default async function BlogPost({ params }: Props) {
                 Book an appointment or drop by our St. Catharines shop — we'll get you back on the road fast.
               </p>
             </div>
-            <a
-              href={`tel:${SHOP.phoneHref}`}
-              className="whitespace-nowrap bg-speedy-yellow text-speedy-blue-dark font-bold uppercase tracking-wide px-8 py-4 rounded-sm hover:bg-white transition"
-            >
-              Call {SHOP.phone}
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+              <a
+                href={SHOP.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="whitespace-nowrap bg-speedy-yellow text-speedy-blue-dark font-bold uppercase tracking-wide px-8 py-4 rounded-sm hover:bg-white transition text-center"
+              >
+                Book Appointment
+              </a>
+              <a
+                href={`tel:${SHOP.phoneHref}`}
+                className="whitespace-nowrap border-2 border-white text-white font-bold uppercase tracking-wide px-8 py-4 rounded-sm hover:bg-white hover:text-speedy-blue transition text-center"
+              >
+                Call {SHOP.phone}
+              </a>
+            </div>
           </div>
         </section>
 
@@ -172,14 +167,12 @@ export default async function BlogPost({ params }: Props) {
                   href={`/blog/${b.slug}`}
                   className="group bg-white border border-speedy-gray-300 hover:border-speedy-blue rounded-sm overflow-hidden transition flex flex-col"
                 >
-                  <div className="aspect-[16/10] bg-speedy-gray-300 relative overflow-hidden">
-                    {b.featuredImage ? (
-                      // eslint-disable-next-line @next/next/no-img-element
+                  {b.featuredImage && (
+                    <div className="aspect-[16/10] bg-speedy-gray-100 relative overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={b.featuredImage} alt={b.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500" />
-                    ) : (
-                      <BlogFallback />
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <div className="p-6 flex-1 flex flex-col">
                     <div className="text-xs uppercase tracking-widest text-speedy-blue font-bold mb-2">
                       {b.categories?.[0] ?? "News"}

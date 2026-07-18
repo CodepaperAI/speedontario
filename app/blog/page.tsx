@@ -10,21 +10,6 @@ export const metadata: Metadata = {
     "Auto care advice, seasonal maintenance tips, and shop news from Speedy Auto Service St. Catharines.",
 };
 
-function BlogFallback({ label = "Speedy" }: { label?: string }) {
-  return (
-    <div className="w-full h-full speedy-fallback grid place-items-center">
-      <div className="relative z-10 text-center px-6">
-        <div className="font-display font-extrabold text-white/95 text-3xl md:text-4xl uppercase tracking-tight leading-none">
-          {label}
-        </div>
-        <div className="mt-1 font-display font-bold text-speedy-yellow text-xs uppercase tracking-widest">
-          Auto Service
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export default async function BlogIndex() {
   const blogs = await listBlogs({ limit: 24 });
   const [featured, ...rest] = blogs;
@@ -66,20 +51,18 @@ export default async function BlogIndex() {
             {featured && (
               <Link
                 href={`/blog/${featured.slug}`}
-                className="group grid md:grid-cols-[1.15fr_1fr] gap-8 mb-16 items-stretch border border-speedy-gray-300 hover:border-speedy-blue bg-white overflow-hidden rounded-sm transition"
+                className={`group grid ${featured.featuredImage ? "md:grid-cols-[1.15fr_1fr]" : ""} gap-8 mb-16 items-stretch border border-speedy-gray-300 hover:border-speedy-blue bg-white overflow-hidden rounded-sm transition`}
               >
-                <div className="aspect-[16/10] md:aspect-auto relative overflow-hidden bg-speedy-gray-300 min-h-[280px]">
-                  {featured.featuredImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                {featured.featuredImage && (
+                  <div className="aspect-[16/10] md:aspect-auto relative overflow-hidden bg-speedy-gray-100 min-h-[280px]">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={featured.featuredImage}
                       alt={featured.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                     />
-                  ) : (
-                    <BlogFallback label="Featured" />
-                  )}
-                </div>
+                  </div>
+                )}
                 <div className="p-8 md:p-10 flex flex-col justify-center">
                   <div className="flex items-center gap-3 text-xs uppercase tracking-widest font-bold text-speedy-blue mb-4">
                     <span>Featured</span>
@@ -125,18 +108,16 @@ export default async function BlogIndex() {
                     href={`/blog/${b.slug}`}
                     className="group bg-white border border-speedy-gray-300 hover:border-speedy-blue rounded-sm overflow-hidden transition flex flex-col"
                   >
-                    <div className="aspect-[16/10] bg-speedy-gray-300 relative overflow-hidden">
-                      {b.featuredImage ? (
-                        // eslint-disable-next-line @next/next/no-img-element
+                    {b.featuredImage && (
+                      <div className="aspect-[16/10] bg-speedy-gray-100 relative overflow-hidden">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={b.featuredImage}
                           alt={b.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
                         />
-                      ) : (
-                        <BlogFallback />
-                      )}
-                    </div>
+                      </div>
+                    )}
                     <div className="p-6 flex-1 flex flex-col">
                       <div className="text-xs uppercase tracking-widest text-speedy-blue font-bold mb-2">
                         {b.categories?.[0] ?? "News"}
