@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@theme {
+  --color-speedy-blue: #002E6D;
+  --color-speedy-blue-dark: #001F4D;
+  --color-speedy-blue-light: #0058A9;
+  --color-speedy-red: #E30613;
+  --color-speedy-red-dark: #B10310;
+  --color-speedy-yellow: #FFCC00;
+  --color-speedy-black: #0A0A0A;
+  --color-speedy-gray-900: #1A1A1A;
+  --color-speedy-gray-700: #3D3D3D;
+  --color-speedy-gray-500: #7A7A7A;
+  --color-speedy-gray-300: #D4D4D4;
+  --color-speedy-gray-100: #F1F4F8;
+  --color-speedy-cream: #FFFFFF;
+
+  --font-display: var(--font-display), "Barlow Condensed", system-ui, sans-serif;
+  --font-body: var(--font-body), "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #FFFFFF;
+  color: var(--color-speedy-black);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container-x {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  max-width: 80rem;
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .container-x { padding-left: 2rem; padding-right: 2rem; }
+}
+
+.stripe-hero {
+  background:
+    linear-gradient(120deg, rgba(0,46,109,0.97) 0%, rgba(0,88,169,0.95) 100%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.05) 0px,
+      rgba(255,255,255,0.05) 2px,
+      transparent 2px,
+      transparent 24px
+    );
+}
+
+.speedy-fallback {
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,204,0,0.15) 0%, transparent 45%),
+    linear-gradient(135deg, #002E6D 0%, #0058A9 100%);
+  position: relative;
+}
+.speedy-fallback::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(-45deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 22px);
+  pointer-events: none;
+}
+
+.prose-speedy h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  letter-spacing: -0.01em;
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  color: var(--color-speedy-blue);
+}
+.prose-speedy h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-speedy-blue);
+}
+.prose-speedy h4 { font-weight: 600; font-size: 1.15rem; margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--color-speedy-blue); }
+.prose-speedy p { font-size: 1.0625rem; line-height: 1.75; margin-block: 1.25rem; color: var(--color-speedy-gray-900); }
+.prose-speedy a { color: var(--color-speedy-blue-light); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.prose-speedy a:hover { color: var(--color-speedy-blue); }
+.prose-speedy ul, .prose-speedy ol { margin-block: 1.25rem; padding-left: 1.5rem; font-size: 1.0625rem; line-height: 1.75; }
+.prose-speedy ul { list-style: disc; }
+.prose-speedy ol { list-style: decimal; }
+.prose-speedy li { margin-block: 0.4rem; }
+.prose-speedy blockquote {
+  border-left: 4px solid var(--color-speedy-blue);
+  padding: 0.75rem 1.25rem;
+  margin-block: 1.5rem;
+  background: var(--color-speedy-gray-100);
+  font-style: italic;
+  color: var(--color-speedy-gray-900);
+}
+.prose-speedy img { border-radius: 0.5rem; margin-block: 2rem; width: 100%; height: auto; }
+.prose-speedy code {
+  background: var(--color-speedy-gray-100);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.95em;
+}
+.prose-speedy pre {
+  background: var(--color-speedy-blue-dark);
+  color: #F5F5F5;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-block: 1.5rem;
+}
+.prose-speedy pre code { background: transparent; padding: 0; color: inherit; }
+.prose-speedy hr { border: 0; border-top: 1px solid var(--color-speedy-gray-300); margin-block: 2.5rem; }
